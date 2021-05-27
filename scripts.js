@@ -1,22 +1,30 @@
-// Write your JavaScript code here.
-// Remember to pay attention to page loading!
-
 window.addEventListener("load", init);
+
+let rocketImg; // Make global
 
 function init() {
     // Variables
     let takeoffButton = document.getElementById("takeoff");
     let landButton = document.getElementById("landing");
     let abortButton = document.getElementById("missionAbort");
+    let upButton = document.getElementById("up");
+    let downButton = document.getElementById("down");
+    let rightButton = document.getElementById("right");
+    let leftButton = document.getElementById("left");
+
     let flightStatus = document.getElementById("flightStatus");
     let shuttleBackground = document.getElementById("shuttleBackground");
     let spaceShuttleHeight = document.getElementById("spaceShuttleHeight");
-    let rocketImg = document.getElementById("rocket");
+    rocketImg = document.getElementById("rocket");
 
     // Event listeners
     takeoffButton.addEventListener("click", takeoff);
     landButton.addEventListener("click", land);
     abortButton.addEventListener("click", abortMission);
+    upButton.addEventListener("click", function() { moveShuttle(this.id); });
+    downButton.addEventListener("click", function() { moveShuttle(this.id); });
+    leftButton.addEventListener("click", function() { moveShuttle(this.id); });
+    rightButton.addEventListener("click", function() { moveShuttle(this.id); });
 
     // Rocket starting position
     rocketImg.style.position = "absolute";
@@ -55,5 +63,33 @@ function abortMission() {
         flightStatus.innerHTML = "Mission aborted.";
         shuttleBackground.style.backgroundColor = "green";
         spaceShuttleHeight.innerHTML = 0;
+    }
+}
+
+function moveShuttle(id) {
+    // Find current position (with "px" removed from end)
+    let bottomPosition = Number(rocketImg.style.bottom.slice(0, -2));
+    let leftPosition = Number(rocketImg.style.left.slice(0, -2));
+    
+    // Move rocket image based on buttons clicked
+    if (id === "up") {        
+        rocketImg.style.bottom = bottomPosition + 10 + "px";
+
+        // Increase shuttle height
+        spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
+        console.log(spaceShuttleHeight.innerHTML);
+
+    } else if (id === "down") {
+        rocketImg.style.bottom = bottomPosition - 10 + "px";
+
+        // Decrease shuttle height
+        spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) - 10000;
+        console.log(spaceShuttleHeight.innerHTML);
+
+    } else if (id === "right") {
+        rocketImg.style.left = leftPosition + 10 + "px";
+    
+    } else if (id === "left") {
+        rocketImg.style.left = leftPosition - 10 + "px";
     }
 }
