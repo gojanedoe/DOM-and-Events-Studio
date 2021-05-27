@@ -7,6 +7,7 @@ function init() {
     // Variables
     let takeoffButton = document.getElementById("takeoff");
     let landButton = document.getElementById("landing");
+    let abortButton = document.getElementById("missionAbort");
     let flightStatus = document.getElementById("flightStatus");
     let shuttleBackground = document.getElementById("shuttleBackground");
     let spaceShuttleHeight = document.getElementById("spaceShuttleHeight");
@@ -14,6 +15,7 @@ function init() {
     // Event listeners
     takeoffButton.addEventListener("click", takeoff);
     landButton.addEventListener("click", land);
+    abortButton.addEventListener("click", abortMission);
 }
 
 function takeoff() {
@@ -36,4 +38,15 @@ function land() {
     flightStatus.innerHTML = "The shuttle has landed.";
     shuttleBackground.style.backgroundColor = "green";
     spaceShuttleHeight.innerHTML = 0;
+}
+
+function abortMission() {
+    // Confirm that shuttle mission is aborted
+    let isAborted = window.confirm("Confirm that you want to abort the mission.");
+
+    if (isAborted) {
+        flightStatus.innerHTML = "Mission aborted.";
+        shuttleBackground.style.backgroundColor = "green";
+        spaceShuttleHeight.innerHTML = 0;
+    }
 }
