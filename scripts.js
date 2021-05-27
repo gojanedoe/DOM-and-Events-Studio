@@ -11,11 +11,17 @@ function init() {
     let flightStatus = document.getElementById("flightStatus");
     let shuttleBackground = document.getElementById("shuttleBackground");
     let spaceShuttleHeight = document.getElementById("spaceShuttleHeight");
+    let rocketImg = document.getElementById("rocket");
 
     // Event listeners
     takeoffButton.addEventListener("click", takeoff);
     landButton.addEventListener("click", land);
     abortButton.addEventListener("click", abortMission);
+
+    // Rocket starting position
+    rocketImg.style.position = "absolute";
+    rocketImg.style.left = "0px";
+    rocketImg.style.bottom = "0px";
 }
 
 function takeoff() {
@@ -26,7 +32,7 @@ function takeoff() {
         // Change to in-flight text & styling
         flightStatus.innerHTML = "Shuttle in flight.";
         shuttleBackground.style.backgroundColor = "blue";
-        spaceShuttleHeight.innerHTML = 10000;
+        spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
     }
 }
 
@@ -45,6 +51,7 @@ function abortMission() {
     let isAborted = window.confirm("Confirm that you want to abort the mission.");
 
     if (isAborted) {
+        // Change to aborted mission text & styling
         flightStatus.innerHTML = "Mission aborted.";
         shuttleBackground.style.backgroundColor = "green";
         spaceShuttleHeight.innerHTML = 0;
