@@ -28,6 +28,11 @@ function init() {
 
     // Rocket starting position
     rocketImg.style.position = "absolute";
+    resetPosition();
+    
+}
+
+function resetPosition() {
     rocketImg.style.left = "0px";
     rocketImg.style.bottom = "0px";
 }
@@ -41,6 +46,7 @@ function takeoff() {
         flightStatus.innerHTML = "Shuttle in flight.";
         shuttleBackground.style.backgroundColor = "blue";
         spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
+        moveShuttle("takeoff");
     }
 }
 
@@ -52,6 +58,7 @@ function land() {
     flightStatus.innerHTML = "The shuttle has landed.";
     shuttleBackground.style.backgroundColor = "green";
     spaceShuttleHeight.innerHTML = 0;
+    resetPosition();
 }
 
 function abortMission() {
@@ -63,6 +70,7 @@ function abortMission() {
         flightStatus.innerHTML = "Mission aborted.";
         shuttleBackground.style.backgroundColor = "green";
         spaceShuttleHeight.innerHTML = 0;
+        resetPosition();
     }
 }
 
@@ -77,19 +85,21 @@ function moveShuttle(id) {
 
         // Increase shuttle height
         spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) + 10000;
-        console.log(spaceShuttleHeight.innerHTML);
 
     } else if (id === "down") {
         rocketImg.style.bottom = bottomPosition - 10 + "px";
 
         // Decrease shuttle height
         spaceShuttleHeight.innerHTML = Number(spaceShuttleHeight.innerHTML) - 10000;
-        console.log(spaceShuttleHeight.innerHTML);
 
     } else if (id === "right") {
         rocketImg.style.left = leftPosition + 10 + "px";
     
     } else if (id === "left") {
         rocketImg.style.left = leftPosition - 10 + "px";
+
+    } else if (id === "takeoff"){ 
+        // If takeoff() is run, rather than a button being clicked
+        rocketImg.style.bottom = bottomPosition + 10 + "px";
     }
 }
