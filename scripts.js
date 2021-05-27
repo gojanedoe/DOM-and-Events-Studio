@@ -6,13 +6,14 @@ window.addEventListener("load", init);
 function init() {
     // Variables
     let takeoffButton = document.getElementById("takeoff");
+    let landButton = document.getElementById("landing");
     let flightStatus = document.getElementById("flightStatus");
     let shuttleBackground = document.getElementById("shuttleBackground");
     let spaceShuttleHeight = document.getElementById("spaceShuttleHeight");
 
     // Event listeners
     takeoffButton.addEventListener("click", takeoff);
-    
+    landButton.addEventListener("click", land);
 }
 
 function takeoff() {
@@ -27,3 +28,12 @@ function takeoff() {
     }
 }
 
+function land() {
+    // Pop-up message for shuttle landing
+    window.alert("The shuttle is landing. Landing gear engaged.");
+
+    // Change to landing text & styling
+    flightStatus.innerHTML = "The shuttle has landed.";
+    shuttleBackground.style.backgroundColor = "green";
+    spaceShuttleHeight.innerHTML = 0;
+}
